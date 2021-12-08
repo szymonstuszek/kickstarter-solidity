@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import factory from '../ethereum/factory';
 import Layout from '../components/Layout';
 import { Card, Button } from 'semantic-ui-react';
+import { Link } from '../routes';
 
 class CampaignIndex extends Component {
     static async getInitialProps() {
@@ -14,7 +15,11 @@ class CampaignIndex extends Component {
             address => {
                 return {
                     header: address,
-                    description: <a>View campaign</a>,
+                    description: (
+                        <Link route={`/campaigns/${address}`}>
+                            <a>View campaign</a>
+                        </Link>
+                    ),
                     fluid: true
                 }
             }
@@ -28,7 +33,13 @@ class CampaignIndex extends Component {
             <Layout>
                 <div>
                   <h3>Open Campaigns</h3>
-                  <Button floated="right" content='Create campaign' color='green' />
+                  <Link route="/campaigns/new">
+                    <a>
+                     <Button floated="right"
+                        content='Create campaign'
+                        color='green' />
+                    </a>
+                  </Link>
                     {this.renderCampaigns()}
                 </div>
             </Layout>
